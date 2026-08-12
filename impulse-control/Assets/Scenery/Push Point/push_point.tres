@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c4aqw875wq66a"]
+
+[ext_resource type="Texture2D" uid="uid://ducymammumh6h" path="res://Assets/Scenery/Push Point/push_point.png" id="1_i12s4"]
+
+[resource]
+albedo_texture = ExtResource("1_i12s4")

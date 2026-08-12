@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://db5xiwjglp1e0"]
+
+[ext_resource type="PackedScene" uid="uid://bdbej74wxbt8k" path="res://Assets/Scenery/Push Point/push_point.glb" id="1_tv6ay"]
+[ext_resource type="Script" uid="uid://dokfqpi64cuac" path="res://Scripts/interactable.gd" id="2_yh21k"]
+[ext_resource type="Script" uid="uid://dfft0fb1vmbeo" path="res://Scripts/impulse_field.gd" id="3_bewrs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tv6ay"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yh21k"]
+radius = 2.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tv6ay"]
+radius = 10.0
+
+[node name="Pull Point" type="StaticBody3D" unique_id=1520829457]
+collision_layer = 9
+
+[node name="pull_point" parent="." unique_id=1439013552 instance=ExtResource("1_tv6ay")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2138225868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.099999994, 0)
+shape = SubResource("BoxShape3D_tv6ay")
+
+[node name="Interactable Pull" type="Area3D" parent="." unique_id=2008633081]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_yh21k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable Pull" unique_id=239586513]
+shape = SubResource("SphereShape3D_yh21k")
+
+[node name="Pull Field" type="Area3D" parent="." unique_id=1703739551]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("3_bewrs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pull Field" unique_id=1141651785]
+shape = SubResource("SphereShape3D_tv6ay")

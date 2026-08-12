@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://1mpjkatmkabs"]
+
+[ext_resource type="Script" uid="uid://cla04pfjs5mk3" path="res://Scripts/debug_overlay.gd" id="1_uwu1l"]
+
+[sub_resource type="Theme" id="Theme_uwu1l"]
+MarginContainer/constants/margin_bottom = 8
+MarginContainer/constants/margin_left = 8
+MarginContainer/constants/margin_right = 8
+MarginContainer/constants/margin_top = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_b1d80"]
+font_size = 6
+font_color = Color(0, 0.007843138, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rt4d5"]
+line_spacing = 1.0
+paragraph_spacing = -2.0
+font_size = 6
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gb2lk"]
+line_spacing = 1.0
+paragraph_spacing = -2.0
+font_size = 6
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="DebugTextOverlay" type="Control" unique_id=505801776]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_uwu1l")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=945069561]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource("Theme_uwu1l")
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1908754878]
+layout_mode = 2
+alignment = 2
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1164796266]
+unique_name_in_owner = true
+self_modulate = Color(0.005316331, 0.005316331, 0.005316331, 1)
+layout_mode = 2
+text = "FPS: 9,001"
+label_settings = SubResource("LabelSettings_b1d80")
+
+[node name="VersionInfo" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1910777129]
+unique_name_in_owner = true
+self_modulate = Color(0.005894751, 0.005894751, 0.005894751, 1)
+layout_mode = 2
+text = "Build: "
+label_settings = SubResource("LabelSettings_rt4d5")
+vertical_alignment = 2
+
+[node name="DebugInfo" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1872744110]
+self_modulate = Color(0.005894751, 0.005894751, 0.005894751, 1)
+layout_mode = 2
+text = "Parked Souls
+Big Fish Gaming"
+label_settings = SubResource("LabelSettings_gb2lk")
+vertical_alignment = 2
