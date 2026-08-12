@@ -14,3 +14,6 @@ func update_health():
 func update_speed():
 	var speed        = GameState.player_speed
 	speed_label.text = str("Speed: " + str(int(speed)) + " m/s")
+
+func temp():
+	pass
