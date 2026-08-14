@@ -142,36 +142,54 @@ func _physics_process(delta: float) -> void:
 	# Apply impulse
 	if Input.is_action_pressed("push"):
 		var interactable = get_collisions()
-		var temp = str(current_areas)
+		var present_fields = str(current_areas)
 		
-		if interactable[1] != null and str(interactable[1]).contains("Push") and temp.contains("Push Field"):
+		if interactable[1] != null and str(interactable[1]).contains("Push") and present_fields.contains("Push Field"):
 			var push_point_pos: Vector3 = interactable[1].global_position
-			print(push_point_pos)
-			print(self.global_position)
 			var result_vector = self.global_position - push_point_pos
-			print(result_vector)
-			print(result_vector.normalized())
 			velocity = (impulse_strength * result_vector.normalized())
-			print(velocity)
+			
+			# Debug prints
+			#print(push_point_pos)
+			#print(self.global_position)
+			#print(result_vector)
+			#print(result_vector.normalized())
+			#print(velocity)
 	
 		# Apply pull
 	if Input.is_action_pressed("pull"):
 		var interactable = get_collisions()
-		var temp2 = current_areas
-		var temp = str(current_areas)
-		print(temp)
-		print(temp2)
+		var present_fields = str(current_areas)
 		
-		if interactable[1] != null and str(interactable[1]).contains("Pull") and temp.contains("Pull Field"):
+		if interactable[1] != null and str(interactable[1]).contains("Pull") and present_fields.contains("Pull Field"):
 			var pull_point_pos: Vector3 = interactable[1].global_position
-			print(pull_point_pos)
-			print(self.global_position)
 			var result_vector = self.global_position - pull_point_pos
-			print(result_vector)
-			print(result_vector.normalized())
 			velocity = -(impulse_strength * result_vector.normalized())
-			print(velocity)
-	
+			
+			# Debug prints
+			#print(push_point_pos)
+			#print(self.global_position)
+			#print(result_vector)
+			#print(result_vector.normalized())
+			#print(velocity)
+
+	if Input.is_action_pressed("swing"):
+		var interactable = get_collisions()
+		var present_fields = str(current_areas)
+		
+		if interactable[1] != null and str(interactable[1]).contains("Swing") and present_fields.contains("Swing Field"):
+			var pull_point_pos: Vector3 = interactable[1].global_position
+			var result_vector = self.global_position - pull_point_pos
+			#TODO Add length equation and maintain across arc "sqrt(pow(velocity.x,2) + pow(velocity.y,2) + pow(velocity.z,2))"
+			velocity = -(impulse_strength * result_vector.normalized())
+			
+			# Debug prints
+			#print(push_point_pos)
+			#print(self.global_position)
+			#print(result_vector)
+			#print(result_vector.normalized())
+			#print(velocity)
+		
 	# Update HUD speed
 	GameState.player_speed = sqrt(pow(velocity.x,2) + pow(velocity.y,2) + pow(velocity.z,2))
 	

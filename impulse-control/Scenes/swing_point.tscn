@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://2gniy8xftoig"]
+
+[ext_resource type="PackedScene" uid="uid://bdbej74wxbt8k" path="res://Assets/Scenery/Push Point/impulse_point.glb" id="1_gt1je"]
+[ext_resource type="Script" uid="uid://dokfqpi64cuac" path="res://Scripts/interactable.gd" id="2_l0gdy"]
+[ext_resource type="Script" uid="uid://dfft0fb1vmbeo" path="res://Scripts/impulse_field.gd" id="3_7hlch"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gt1je"]
+size = Vector3(1, 0.3, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gt1je"]
+radius = 2.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ta58v"]
+radius = 10.0
+
+[node name="Swing Point" type="StaticBody3D" unique_id=1888979938]
+
+[node name="swing_point" parent="." unique_id=1845896270 instance=ExtResource("1_gt1je")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=840268781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0825952, 0)
+shape = SubResource("BoxShape3D_gt1je")
+
+[node name="Interactable Swing" type="Area3D" parent="." unique_id=911995491]
+script = ExtResource("2_l0gdy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable Swing" unique_id=981234218]
+shape = SubResource("SphereShape3D_gt1je")
+
+[node name="Swing Field" type="Area3D" parent="." unique_id=940220804]
+script = ExtResource("3_7hlch")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Swing Field" unique_id=835557643]
+shape = SubResource("SphereShape3D_ta58v")
+debug_color = Color(0.42754805, 0.45895782, 1, 0.64000005)

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://5ln62caiti25" path="res://Assets/Textures/Prototype Textures/Orange/texture_06.png" id="4_vgaev"]
 [ext_resource type="PackedScene" uid="uid://b5er3ej7slpey" path="res://Scenes/push_point.tscn" id="5_i8ttf"]
 [ext_resource type="PackedScene" uid="uid://db5xiwjglp1e0" path="res://Scenes/pull_point.tscn" id="6_lfj1s"]
+[ext_resource type="PackedScene" uid="uid://2gniy8xftoig" path="res://Scenes/swing_point.tscn" id="7_mc3d2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c0h7r"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -53,62 +54,79 @@ material = SubResource("StandardMaterial3D_i8ttf")
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Structures" unique_id=774770376]
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1492783471]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 5.4, 0)
-size = Vector3(1, 10, 25)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=149177021]
+[node name="Lower North Wall" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=149177021]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19999997, 5.3999996, -12)
 size = Vector3(24, 10, 1)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Structures/CSGCombiner3D/CSGBox3D2" unique_id=550035855]
+[node name="North Door" type="CSGBox3D" parent="Structures/CSGCombiner3D/Lower North Wall" unique_id=550035855]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800001, -2.5000002, 0.05000019)
 operation = 2
 size = Vector3(3, 5.2000003, 1.5)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1249865505]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.7, 5.4, 5.9604645e-07)
-size = Vector3(1, 10, 25)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=489591849]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.20000045, 5.3999996, 12.000001)
-size = Vector3(24, 10, 1)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Structures/CSGCombiner3D/CSGBox3D4" unique_id=268231812]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800001, -2.5000002, 0.05000019)
-operation = 2
-size = Vector3(3, 5.2000003, 1.5)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1086933338]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.8, 2.8999996, -4.699999)
-size = Vector3(12, 5, 1)
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=578473573]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.7, 15.4, 5.9604645e-07)
-size = Vector3(1, 10, 25)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1147000789]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 15.4, 0)
-size = Vector3(1, 10, 25)
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=2010012617]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.19999981, 15.4, 12.000001)
-size = Vector3(1, 10, 24)
-
-[node name="CSGBox3D9" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=600185706]
+[node name="Upper North Wall" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=600185706]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.19999981, 15.4, -11.999999)
 size = Vector3(1, 10, 24)
 
-[node name="Push Point" parent="." unique_id=1148569366 instance=ExtResource("5_i8ttf")]
+[node name="Upper South Wall" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=2010012617]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 0.19999981, 15.4, 12.000001)
+size = Vector3(1, 10, 24)
+
+[node name="Lower South Wall" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=489591849]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.20000045, 5.3999996, 12.000001)
+size = Vector3(24, 10, 1)
+
+[node name="South Door" type="CSGBox3D" parent="Structures/CSGCombiner3D/Lower South Wall" unique_id=268231812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.800001, -2.5000002, 0.05000019)
+operation = 2
+size = Vector3(3, 5.2000003, 1.5)
+
+[node name="Upper East Wall" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=578473573]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.7, 15.4, 5.9604645e-07)
+size = Vector3(1, 10, 25)
+
+[node name="Lower East Wall" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1249865505]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.7, 5.4, 5.9604645e-07)
+size = Vector3(1, 10, 25)
+
+[node name="Upper West Wall" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1147000789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 15.4, 0)
+size = Vector3(1, 10, 25)
+
+[node name="Lower West Wall" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1492783471]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 5.4, 0)
+size = Vector3(1, 10, 25)
+
+[node name="Half Wall" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1086933338]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.8, 2.8999996, -4.699999)
+size = Vector3(12, 5, 1)
+
+[node name="West Opening" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1995827845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 8.7, -2.3841858e-07)
+operation = 2
+size = Vector3(1.2, 16.800001, 10.8)
+
+[node name="East Opening" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=2058314429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 8.699999, 0)
+operation = 2
+size = Vector3(1.2, 16.800001, 10.8)
+
+[node name="Crossbeam" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=259469295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.9, 0)
+size = Vector3(1.2, 1, 23)
+
+[node name="Internal Push Point" parent="." unique_id=1148569366 instance=ExtResource("5_i8ttf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_mask = 9
 
-[node name="Push Point2" parent="." unique_id=730092336 instance=ExtResource("5_i8ttf")]
+[node name="External Push Point" parent="." unique_id=730092336 instance=ExtResource("5_i8ttf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0.5, 0)
 collision_mask = 9
 
-[node name="Pull Point" parent="." unique_id=1520829457 instance=ExtResource("6_lfj1s")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 10, -11.5)
+[node name="Internal Pull Point" parent="." unique_id=1520829457 instance=ExtResource("6_lfj1s")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 10, -12)
 
-[node name="Pull Point2" parent="." unique_id=1613617322 instance=ExtResource("6_lfj1s")]
-transform = Transform3D(-4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, -3.821371e-15, 0, -8.742278e-08, -1, 13.2, 10.000001, 9.536743e-07)
+[node name="External Pull Point" parent="." unique_id=1613617322 instance=ExtResource("6_lfj1s")]
+transform = Transform3D(-4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, -3.821371e-15, 0, -8.742278e-08, -1, 12.7, 18.5, 9.536743e-07)
+
+[node name="Swing Point" parent="." unique_id=1888979938 instance=ExtResource("7_mc3d2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.800001, 0)

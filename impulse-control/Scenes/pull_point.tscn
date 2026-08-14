@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://db5xiwjglp1e0"]
 
-[ext_resource type="PackedScene" uid="uid://bdbej74wxbt8k" path="res://Assets/Scenery/Push Point/push_point.glb" id="1_tv6ay"]
+[ext_resource type="PackedScene" uid="uid://bdbej74wxbt8k" path="res://Assets/Scenery/Push Point/impulse_point.glb" id="1_tv6ay"]
 [ext_resource type="Script" uid="uid://dokfqpi64cuac" path="res://Scripts/interactable.gd" id="2_yh21k"]
 [ext_resource type="Script" uid="uid://dfft0fb1vmbeo" path="res://Scripts/impulse_field.gd" id="3_bewrs"]
 
@@ -37,3 +37,4 @@ script = ExtResource("3_bewrs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pull Field" unique_id=1141651785]
 shape = SubResource("SphereShape3D_tv6ay")
+debug_color = Color(0, 0.6507289, 0.09320182, 0.64000005)

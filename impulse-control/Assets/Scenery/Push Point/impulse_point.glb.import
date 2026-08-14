@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bdbej74wxbt8k"
-path="res://.godot/imported/push_point.glb-4b26be8270eb3d862f12975da5313dac.scn"
+path="res://.godot/imported/impulse_point.glb-166a8676fd7294cc315e177794a707df.scn"
 
 [deps]
 
-source_file="res://Assets/Scenery/Push Point/push_point.glb"
-dest_files=["res://.godot/imported/push_point.glb-4b26be8270eb3d862f12975da5313dac.scn"]
+source_file="res://Assets/Scenery/Push Point/impulse_point.glb"
+dest_files=["res://.godot/imported/impulse_point.glb-166a8676fd7294cc315e177794a707df.scn"]
 
 [params]
 
