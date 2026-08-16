@@ -14,6 +14,7 @@ radius = 2.5
 radius = 10.0
 
 [node name="Swing Point" type="StaticBody3D" unique_id=1888979938]
+collision_layer = 9
 
 [node name="swing_point" parent="." unique_id=1845896270 instance=ExtResource("1_gt1je")]
 
@@ -22,12 +23,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0825952, 0)
 shape = SubResource("BoxShape3D_gt1je")
 
 [node name="Interactable Swing" type="Area3D" parent="." unique_id=911995491]
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("2_l0gdy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable Swing" unique_id=981234218]
 shape = SubResource("SphereShape3D_gt1je")
 
 [node name="Swing Field" type="Area3D" parent="." unique_id=940220804]
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("3_7hlch")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Swing Field" unique_id=835557643]

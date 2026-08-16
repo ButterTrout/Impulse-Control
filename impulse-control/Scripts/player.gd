@@ -178,9 +178,29 @@ func _physics_process(delta: float) -> void:
 		var present_fields = str(current_areas)
 		
 		if interactable[1] != null and str(interactable[1]).contains("Swing") and present_fields.contains("Swing Field"):
-			var pull_point_pos: Vector3 = interactable[1].global_position
-			var result_vector = self.global_position - pull_point_pos
+			var swing_point_pos: Vector3 = interactable[1].global_position
+			var result_vector = self.global_position - swing_point_pos
+			var player_pos = self.global_position
+			var zero_axis_pos = swing_point_pos - Vector3(0,1,0)
 			#TODO Add length equation and maintain across arc "sqrt(pow(velocity.x,2) + pow(velocity.y,2) + pow(velocity.z,2))"
+			
+			var dotProduct = player_pos.x * zero_axis_pos.x + player_pos.y * zero_axis_pos.y + player_pos.z * zero_axis_pos.z
+			
+			#Find magnitude of line AB and BC
+			var magnitudeAB = sqrt(pow(player_pos.x,2) + pow(player_pos.z,2) + pow(player_pos.z,2))
+			var magnitudeBC = sqrt(pow(zero_axis_pos.x,2) + pow(zero_axis_pos.y,2) + pow(zero_axis_pos.z,2))
+
+			#Find the cosine of the angle formed by line AB and BC
+			var angle = dotProduct
+			angle = angle / (magnitudeAB * magnitudeBC)
+			
+			#Find angle in radian
+			angle = acos(angle)
+			
+			#Print the angle
+			print(angle)
+			
+			
 			velocity = -(impulse_strength * result_vector.normalized())
 			
 			# Debug prints

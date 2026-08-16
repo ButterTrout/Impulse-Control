@@ -130,3 +130,6 @@ transform = Transform3D(-4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, -3.821
 
 [node name="Swing Point" parent="." unique_id=1888979938 instance=ExtResource("7_mc3d2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.800001, 0)
+
+[node name="Swing Point2" parent="." unique_id=1050271880 instance=ExtResource("7_mc3d2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1, 0.5, 0)
