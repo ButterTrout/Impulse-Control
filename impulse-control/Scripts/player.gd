@@ -182,24 +182,26 @@ func _physics_process(delta: float) -> void:
 			var result_vector = self.global_position - swing_point_pos
 			var player_pos = self.global_position
 			var zero_axis_pos = swing_point_pos - Vector3(0,1,0)
+			
 			#TODO Add length equation and maintain across arc "sqrt(pow(velocity.x,2) + pow(velocity.y,2) + pow(velocity.z,2))"
+			# Find vectors between points
+			var v1 = Vector3(player_pos.x - swing_point_pos.x,player_pos.y - swing_point_pos.y,player_pos.z - swing_point_pos.z)
+			var v2 = Vector3(zero_axis_pos.x - swing_point_pos.x,zero_axis_pos.y - swing_point_pos.y,zero_axis_pos.z - swing_point_pos.z)
 			
-			var dotProduct = player_pos.x * zero_axis_pos.x + player_pos.y * zero_axis_pos.y + player_pos.z * zero_axis_pos.z
+			# Find magnitude of vectors
+			var v1mag = sqrt(pow(v1.x,2) + pow(v1.z,2) + pow(v1.z,2))
+			var v2mag = sqrt(pow(v2.x,2) + pow(v2.y,2) + pow(v2.z,2))
 			
-			#Find magnitude of line AB and BC
-			var magnitudeAB = sqrt(pow(player_pos.x,2) + pow(player_pos.z,2) + pow(player_pos.z,2))
-			var magnitudeBC = sqrt(pow(zero_axis_pos.x,2) + pow(zero_axis_pos.y,2) + pow(zero_axis_pos.z,2))
-
-			#Find the cosine of the angle formed by line AB and BC
-			var angle = dotProduct
-			angle = angle / (magnitudeAB * magnitudeBC)
+			# Normalize vectors
+			var v1norm = Vector3(v1.x / v1mag,v1.y / v1mag,v1.z / v1mag)
+			var v2norm = Vector3(v2.x / v2mag,v2.y / v2mag,v2.z / v2mag)
 			
-			#Find angle in radian
-			angle = acos(angle)
+			# Dot product
+			var result = (v1norm.x * v2norm.x) + (v1norm.y * v2norm.y) + (v1norm.z * v2norm.z)
 			
-			#Print the angle
-			print(angle)
-			
+			#Find the cosine of the angle formed by vectors and convert to degrees
+			var angle = acos(result)
+			angle = (180 / PI) * angle
 			
 			velocity = -(impulse_strength * result_vector.normalized())
 			
