@@ -114,6 +114,10 @@ size = Vector3(1.2, 16.800001, 10.8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.9, 0)
 size = Vector3(1.2, 1, 23)
 
+[node name="External Crossbeam" type="CSGBox3D" parent="Structures/CSGCombiner3D" unique_id=1281866236]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.6, 7.6000023, -2.3841858e-07)
+size = Vector3(1.2, 1, 23)
+
 [node name="Internal Push Point" parent="." unique_id=1148569366 instance=ExtResource("5_i8ttf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_mask = 9
@@ -131,5 +135,5 @@ transform = Transform3D(-4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, -3.821
 [node name="Swing Point" parent="." unique_id=1888979938 instance=ExtResource("7_mc3d2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.800001, 0)
 
-[node name="Swing Point2" parent="." unique_id=1050271880 instance=ExtResource("7_mc3d2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.1, 0.5, 0)
+[node name="Swing Point2" parent="." unique_id=517969128 instance=ExtResource("7_mc3d2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.6, 7.5, 0)

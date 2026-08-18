@@ -33,7 +33,9 @@ var can_impulse : bool = false
 ## How fast do we freefly?
 @export var freefly_speed : float = 25.0
 ## How fast should impulses move us?
-@export var impulse_strength : float = 25
+@export var impulse_strength : float = 25.0
+## How fast can we swing?
+@export var swing_speed : float = 5.0
 
 @export_group("Input Actions")
 ## Name of Input Action to move Left.
@@ -62,6 +64,12 @@ var freeflying : bool = false
 @onready var raycast: RayCast3D = $Head/Camera3D/RayCast3D
 @onready var player_area: Area3D = $Area3D
 var current_areas = []
+
+## Swing variables
+var is_swinging : bool
+var swing_node : Node3D
+var swing_plane : Vector3
+var swing_len : float
 
 func _ready() -> void:
 	check_input_mappings()
@@ -104,7 +112,7 @@ func _physics_process(delta: float) -> void:
 		if not is_on_floor():
 			#velocity += get_gravity() * delta
 			velocity.y = velocity.y - (fall_acceleration * delta)
-
+	
 	# Apply jumping
 	if can_jump:
 		if Input.is_action_pressed(input_jump) and is_on_floor():
@@ -116,7 +124,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 0.0
 		if is_on_floor():
 			can_jump = true
-
+	
 	# Modify speed based on sprinting
 	if can_sprint and Input.is_action_pressed(input_sprint):
 			move_speed = sprint_speed
@@ -156,7 +164,7 @@ func _physics_process(delta: float) -> void:
 			#print(result_vector.normalized())
 			#print(velocity)
 	
-		# Apply pull
+	# Apply pull
 	if Input.is_action_pressed("pull"):
 		var interactable = get_collisions()
 		var present_fields = str(current_areas)
@@ -172,51 +180,55 @@ func _physics_process(delta: float) -> void:
 			#print(result_vector)
 			#print(result_vector.normalized())
 			#print(velocity)
-
-	if Input.is_action_pressed("swing"):
+	
+	# TODO: Preserve momentum when coming off swing
+	# TODO: Factor in gravity to swing speed
+	# Enable swing
+	if Input.is_action_just_pressed("swing"):
 		var interactable = get_collisions()
-		var present_fields = str(current_areas)
 		
-		if interactable[1] != null and str(interactable[1]).contains("Swing") and present_fields.contains("Swing Field"):
-			var swing_point_pos: Vector3 = interactable[1].global_position
-			var result_vector = self.global_position - swing_point_pos
-			var player_pos = self.global_position
-			var zero_axis_pos = swing_point_pos - Vector3(0,1,0)
+		# If interacting with swing point, set initial variables
+		if interactable[1] != null:
+			is_swinging = true
+			swing_node = interactable[1]
+			swing_plane = global_transform.basis.x
 			
-			#TODO Add length equation and maintain across arc "sqrt(pow(velocity.x,2) + pow(velocity.y,2) + pow(velocity.z,2))"
-			# Find vectors between points
-			var v1 = Vector3(player_pos.x - swing_point_pos.x,player_pos.y - swing_point_pos.y,player_pos.z - swing_point_pos.z)
-			var v2 = Vector3(zero_axis_pos.x - swing_point_pos.x,zero_axis_pos.y - swing_point_pos.y,zero_axis_pos.z - swing_point_pos.z)
+			# Make unit plane for consistency
+			swing_plane = round(swing_plane)
 			
-			# Find magnitude of vectors
-			var v1mag = sqrt(pow(v1.x,2) + pow(v1.z,2) + pow(v1.z,2))
-			var v2mag = sqrt(pow(v2.x,2) + pow(v2.y,2) + pow(v2.z,2))
-			
-			# Normalize vectors
-			var v1norm = Vector3(v1.x / v1mag,v1.y / v1mag,v1.z / v1mag)
-			var v2norm = Vector3(v2.x / v2mag,v2.y / v2mag,v2.z / v2mag)
-			
-			# Dot product
-			var result = (v1norm.x * v2norm.x) + (v1norm.y * v2norm.y) + (v1norm.z * v2norm.z)
-			
-			#Find the cosine of the angle formed by vectors and convert to degrees
-			var angle = acos(result)
-			angle = (180 / PI) * angle
-			
-			velocity = -(impulse_strength * result_vector.normalized())
-			
-			# Debug prints
-			#print(push_point_pos)
-			#print(self.global_position)
-			#print(result_vector)
-			#print(result_vector.normalized())
-			#print(velocity)
+			# Determine initial swing distance to keep it
+			var vector = global_position - swing_node.global_position
+			swing_len = vector.length()
+	
+	if is_swinging:
+		var vector = global_position - swing_node.global_position
+		var dir = vector.normalized()
 		
+		dir = dir.rotated(swing_plane.normalized(), 3.0 * delta)
+		
+		global_position = swing_node.global_position + dir * swing_len
+		
+		velocity = self.velocity
+		
+		if Input.is_action_just_released("swing"):
+			is_swinging = false
+	
 	# Update HUD speed
-	GameState.player_speed = sqrt(pow(velocity.x,2) + pow(velocity.y,2) + pow(velocity.z,2))
+	GameState.player_speed = velocity.length()
 	
 	# Use velocity to actually move
-	move_and_slide()
+	if is_swinging:
+		pass
+	else:
+		move_and_slide()
+
+## Save for hold position mechanic
+	#if v1mag > stored_distance:
+	#	var corrected_move = 10 - v1mag
+	#	self.global_position -= v1norm * corrected_move
+	#elif v1mag < stored_distance:
+	#	var corrected_move = 10 - v1mag
+	#	self.global_position += v1norm * corrected_move
 
 ## Rotate us to look around.
 ## Base of controller rotates around y (left/right). Head rotates around x (up/down).
