@@ -70,6 +70,9 @@ var is_swinging : bool
 var swing_node : Node3D
 var swing_plane : Vector3
 var swing_len : float
+var swing_v0 : float
+var swing_exit_v : Vector3
+var swing_just_released : bool
 
 func _ready() -> void:
 	check_input_mappings()
@@ -186,12 +189,14 @@ func _physics_process(delta: float) -> void:
 	# Enable swing
 	if Input.is_action_just_pressed("swing"):
 		var interactable = get_collisions()
+		var present_fields = str(current_areas)
 		
 		# If interacting with swing point, set initial variables
-		if interactable[1] != null:
+		if interactable[1] != null and str(interactable[1]).contains("Swing") and present_fields.contains("Swing Field"):
 			is_swinging = true
 			swing_node = interactable[1]
 			swing_plane = global_transform.basis.x
+			swing_v0 = velocity.length()
 			
 			# Make unit plane for consistency
 			swing_plane = round(swing_plane)
@@ -204,14 +209,16 @@ func _physics_process(delta: float) -> void:
 		var vector = global_position - swing_node.global_position
 		var dir = vector.normalized()
 		
-		dir = dir.rotated(swing_plane.normalized(), 3.0 * delta)
+		dir = dir.rotated(swing_plane.normalized(), swing_v0 * delta)
 		
 		global_position = swing_node.global_position + dir * swing_len
 		
 		velocity = self.velocity
 		
 		if Input.is_action_just_released("swing"):
+			swing_exit_v = velocity
 			is_swinging = false
+			swing_just_released = true
 	
 	# Update HUD speed
 	GameState.player_speed = velocity.length()
@@ -220,6 +227,9 @@ func _physics_process(delta: float) -> void:
 	if is_swinging:
 		pass
 	else:
+		if swing_just_released:
+			velocity = swing_exit_v
+			swing_just_released = false
 		move_and_slide()
 
 ## Save for hold position mechanic
